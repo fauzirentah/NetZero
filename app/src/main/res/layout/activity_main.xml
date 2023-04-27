@@ -1,41 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:padding="24dp">
+    tools:context=".MainActivity">
 
-    <TextView
+    <ImageView
+        android:id="@+id/appLogoSplashScreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Enter your CO2 emission (in tons):"
-        android:textSize="20sp"
-        android:textStyle="bold"/>
+        android:contentDescription="@string/app_logo_description"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_logo_big" />
 
-    <EditText
-        android:id="@+id/co2_emission_input"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="e.g. 1000"
-        android:inputType="number"
-        android:textSize="18sp"/>
-
-    <Button
-        android:id="@+id/convert_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="Convert"
-        android:textAllCaps="false"
-        android:textSize="20sp"/>
-
-    <TextView
-        android:id="@+id/result_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:textSize="18sp"/>
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
