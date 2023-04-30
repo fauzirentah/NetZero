@@ -12,4 +12,17 @@ public class ExpenseView {
         this.title = title;
         this.spent = spent;
     }
+
+    public int getIconId() {
+        return this.iconId;
+    }
+    public long getExpenseId() {
+        return this.expenseId;
+    }
+    public String getTitle() {
+        return this.title;
+    }
+    public double getSpent() {
+        return this.spent;
+    }
 }

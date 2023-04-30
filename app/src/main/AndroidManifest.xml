@@ -42,6 +42,15 @@
         <activity
             android:name=".TrackActivity"
             android:exported="false" />
+        <activity
+            android:name=".UserActivity"
+            android:exported="false" />
+        <activity
+            android:name=".SingleExpenseActivity"
+            android:exported="false" />
+        <activity
+            android:name=".AddExpenseActivity"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"

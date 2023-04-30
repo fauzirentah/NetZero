@@ -46,6 +46,16 @@ public class Expense {
         this.carId = carId;
     }
 
+    public long getExpenseId() {
+        return this.expenseId;
+    }
+
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getDescription() { return this.description; }
+
     public String getType() {
         return this.type;
     }
