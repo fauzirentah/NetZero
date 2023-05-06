@@ -35,6 +35,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     private LinearLayout llDescription;
     private LinearLayout llPricePerLiter;
     private LinearLayout llTotalKm;
+    private LinearLayout llCo2Title;
     private LinearLayout llTaxTitle;
     private LinearLayout llMaintenanceTitle;
     private LinearLayout llYear;
@@ -45,6 +46,7 @@ public class AddExpenseActivity extends AppCompatActivity {
     private EditText etTotalKm;
     private EditText etMaintenanceTitle;
     private EditText etTaxTitle;
+    private EditText etCo2Title;
     private EditText etDescription;
     private EditText etYear;
     private Button btnRegister;
@@ -64,6 +66,7 @@ public class AddExpenseActivity extends AppCompatActivity {
 
         llPricePerLiter = findViewById(R.id.etPricePerLiterContainer);
         llTotalKm = findViewById(R.id.etTotalKmContainer);
+        llCo2Title = findViewById(R.id.etCo2TitleContainer);
         llTaxTitle = findViewById(R.id.etTaxTitleContainer);
         llDescription = findViewById(R.id.etOptionalDescriptionContainer);
         llMaintenanceTitle = findViewById(R.id.etMaintenanceTitleContainer);
@@ -73,6 +76,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         etTotalSpent = findViewById(R.id.etRefTotalSpent);
         etPricePerLiter = findViewById(R.id.etRefPricePerLiter);
         etTotalKm = findViewById(R.id.etRefTotalKm);
+        etCo2Title = findViewById(R.id.etCo2Title);
         etMaintenanceTitle = findViewById(R.id.etMaintenanceTitle);
         etTaxTitle = findViewById(R.id.etTaxTitle);
         etDescription = findViewById(R.id.etOptionalDescription);
@@ -104,6 +108,9 @@ public class AddExpenseActivity extends AppCompatActivity {
         switch (expenseType) {
             case "REFUEL":
                 break;
+            case "CO2":
+                llCo2Title.setVisibility(View.VISIBLE);
+                break;
             case "TAX":
                 llTaxTitle.setVisibility(View.VISIBLE);
                 break;
@@ -119,6 +126,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         if (expenseIdExtra != -1L) { //We are modifying an existing expense
             expenseId = expenseIdExtra;
             tvTitleLabel.setText(getText(expenseType.equals("REFUEL") ? R.string.update_refuel :
+                    expenseType.equals("CO2") ? R.string.update_co2 :
                     expenseType.equals("TAX") ? R.string.update_tax :
                             expenseType.equals("MAINTENANCE") ? R.string.update_maintenance :
                                     R.string.update_insurance));
@@ -138,6 +146,9 @@ public class AddExpenseActivity extends AppCompatActivity {
                         case "TAX":
                             etTaxTitle.setText(expense.getTitle());
                             break;
+                        case "CO2":
+                            etCo2Title.setText(expense.getTitle());
+                            break;
                         case "MAINTENANCE":
                             etMaintenanceTitle.setText(expense.getTitle());
                             break;
@@ -149,6 +160,7 @@ public class AddExpenseActivity extends AppCompatActivity {
         } else {
             tvTitleLabel.setText(getText(expenseType.equals("REFUEL") ? R.string.label_add_refuel :
                     expenseType.equals("TAX") ? R.string.label_add_tax :
+                            expenseType.equals("CO2") ? R.string.label_add_co2 :
                             expenseType.equals("MAINTENANCE") ? R.string.label_add_maintenance :
                                     R.string.label_add_insurance));
         }
@@ -249,6 +261,26 @@ public class AddExpenseActivity extends AppCompatActivity {
                     newExpense = new Expense(
                             expenseId,
                             tTitle,
+                            expenseType,
+                            dateString,
+                            totalSpent,
+                            description,
+                            null,
+                            null,
+                            selectedCarId
+                    );
+                }
+                break;
+            case "CO2":
+                String cTitle = etCo2Title.getText().toString();
+
+                if (totalSpent < 0 || cTitle.equals("")) {
+                    Toast.makeText(this, getString(R.string.insert_all_data_warning), Toast.LENGTH_SHORT).show();
+                    errorFlag = true;
+                } else {
+                    newExpense = new Expense(
+                            expenseId,
+                            cTitle,
                             expenseType,
                             dateString,
                             totalSpent,

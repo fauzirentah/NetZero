@@ -20,6 +20,8 @@ public class DashboardActivity extends AppCompatActivity {
     private Animation rotateClose;
     private Animation fromBottom;
     private Animation toBottom;
+
+    private FloatingActionButton fabAddCo2;
     private FloatingActionButton fabAddMaintenance;
     private FloatingActionButton fabAddExpense;
     private FloatingActionButton fabAddRefuel;
@@ -39,6 +41,7 @@ public class DashboardActivity extends AppCompatActivity {
         toBottom = AnimationUtils.loadAnimation(this, R.anim.to_bottom_anim);
 
         fabAddMaintenance = findViewById(R.id.fabAddMaintenance);
+        fabAddCo2 = findViewById(R.id.fabAddCo2);
         fabAddExpense = findViewById(R.id.fabAddExpense);
         fabAddRefuel = findViewById(R.id.fabAddRefuel);
         fabAddInsurance = findViewById(R.id.fabAddInsurance);
@@ -82,6 +85,14 @@ public class DashboardActivity extends AppCompatActivity {
             }
         });
 
+        fabAddCo2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //startActivity(new Intent(DashboardActivity.this, AddExpenseActivity.class).putExtra("expenseType", "CO2"));
+                startActivity(new Intent(DashboardActivity.this, GetReadingsActivity.class).putExtra("expenseType", "CO2"));
+            }
+        });
+
         fabAddTax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,9 +118,11 @@ public class DashboardActivity extends AppCompatActivity {
     private void setVisibility() {
         if (!clicked) {
             fabAddRefuel.setVisibility(View.VISIBLE);
+            fabAddCo2.setVisibility(View.VISIBLE);
 
         } else {
             fabAddMaintenance.setVisibility(View.GONE);
+            fabAddCo2.setVisibility(View.INVISIBLE);
             fabAddRefuel.setVisibility(View.INVISIBLE);
             fabAddInsurance.setVisibility(View.GONE);
             fabAddTax.setVisibility((View.GONE));
@@ -121,12 +134,14 @@ public class DashboardActivity extends AppCompatActivity {
         private void setAnimation() {
             if (!clicked) {
                 fabAddRefuel.startAnimation(fromBottom);
+                fabAddCo2.startAnimation(fromBottom);
                 fabAddMaintenance.startAnimation(fromBottom);
                 fabAddInsurance.startAnimation(fromBottom);
                 fabAddTax.startAnimation(fromBottom);
                 fabAddExpense.startAnimation(rotateOpen);
             } else {
                 fabAddRefuel.startAnimation(toBottom);
+                fabAddCo2.startAnimation(toBottom);
                 fabAddMaintenance.startAnimation(toBottom);
                 fabAddInsurance.startAnimation(toBottom);
                 fabAddTax.startAnimation(toBottom);
@@ -137,11 +152,13 @@ public class DashboardActivity extends AppCompatActivity {
         private void setClickable() {
             if (!clicked) {
                 fabAddRefuel.setClickable(true);
+                fabAddCo2.setClickable(true);
                 fabAddMaintenance.setClickable(true);
                 fabAddInsurance.setClickable(true);
                 fabAddTax.setClickable(true);
             } else {
                 fabAddRefuel.setClickable(false);
+                fabAddCo2.setClickable(false);
                 fabAddMaintenance.setClickable(false);
                 fabAddInsurance.setClickable(false);
                 fabAddTax.setClickable(false);

@@ -37,6 +37,21 @@
         android:focusable="true"
         android:src="@drawable/ic_baseline_local_gas_station_24"
         app:backgroundTint="@color/greengasoil"
+        app:layout_constraintBottom_toTopOf="@+id/fabAddCo2"
+        app:layout_constraintEnd_toEndOf="@+id/fabAddCo2"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fabAddCo2"
+        android:visibility="invisible"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="2dp"
+        android:contentDescription="@string/fab_add_expense"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic_baseline_carbon"
+        app:backgroundTint="@color/greengasoil"
         app:layout_constraintBottom_toTopOf="@+id/fabAddMaintenance"
         app:layout_constraintEnd_toEndOf="@+id/fabAddMaintenance"
         app:tint="@color/white" />

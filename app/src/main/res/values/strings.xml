@@ -14,6 +14,7 @@
     <string name="petrol">Petrol</string>
     <string name="hybrid">Hybrid</string>
     <string name="fab_add_expense">Add expense</string>
+    <string name="Get_co2_readings" translatable="false">Get CO2 readings</string>
     <string name="btn_register">Register</string>
     <string name="hint_km">Ex: 49556 km</string>
     <string name="label_total_km">Total car\'s km</string>
@@ -37,6 +38,12 @@
     <string name="hint_tax_title">Ex: Car tax</string>
     <string name="label_add_tax">Add tax</string>
     <string name="label_tax_title">Tax name</string>
+    <string name="hint_co2_title" translatable="false">Ex: Car CO2 emission</string>
+    <string name="label_add_co2" translatable="false">Add CO2 emission</string>
+    <string name="label_co2_title" translatable="false">Live CO2 data</string>
+    <string name="label_sum_co2_title" translatable="false">Sum</string>
+    <string name="label_count_co2_title" translatable="false">Travel Duration (mins)</string>
+    <string name="label_avg_co2_title" translatable="false">CO2 Average</string>
     <string name="label_welcome_home">Hello, Fauzi!</string>
     <string name="label_car_name">Mini Cooper S</string>
     <string name="label_total_spent_home">This month you spent</string>
@@ -78,11 +85,13 @@
     <string name="placeholed_car">Mini Cooper S</string>
     <string name="generate_expenses">Generate expenses</string>
     <string name="update_refuel">Edit refuel</string>
+    <string name="update_co2" translatable="false">Edit CO2</string>
     <string name="update_tax">Edit tax</string>
     <string name="update_maintenance">Edit maintenance</string>
     <string name="update_insurance">Edit insurance</string>
     <string name="insert_all_data_warning">Insert all data!</string>
     <string name="refuel_title">Refuel</string>
+    <string name="co2_title" translatable="false">CO2</string>
     <string name="insurance_title">Insurance</string>
     <string name="db_error">DB ERROR: delete all data and re-register the car</string>
     <string name="no_expense_registered_warning">No expenses registered!</string>
@@ -108,4 +117,9 @@
     <string name="example_maint_description1">43MYR pads + 30MYR labor</string>
     <string name="example_maint_description2">Oil change at Baum Autowerk in Subang, SEL</string>
     <string name="example_ins_description1">Second yearly payment</string>
+    <string name="start_button" translatable="false">Start</string>
+    <string name="stop_button" translatable="false">Stop</string>
+    <string name="pause_button" translatable="false">Pause</string>
+    <string name="save_journey_button" translatable="false">Journey Complete</string>
+    <string name="sum_label" translatable="false">Sum</string>
 </resources>

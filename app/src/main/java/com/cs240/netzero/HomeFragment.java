@@ -165,6 +165,9 @@ public class HomeFragment extends Fragment {
                         case "REFUEL":
                             iconId = R.drawable.ic_green_local_gas_station_for_list;
                             break;
+                        case "CO2":
+                            iconId = R.drawable.ic_baseline_carbon;
+                            break;
                         case "MAINTENANCE":
                             iconId = R.drawable.ic_tabler_engine;
                             break;
@@ -203,8 +206,8 @@ public class HomeFragment extends Fragment {
         String userName = sharedPreferences.getString("userName", "");
         String carBrand = sharedPreferences.getString("selectedCarBrand", "");
         String carModel = sharedPreferences.getString("selectedCarModel", "");
-        String fuelType = Objects.requireNonNull(sharedPreferences.getString("selectedFuelType", ""));
-        String euroCategory = Objects.requireNonNull(sharedPreferences.getString("selectedEuroCategory", ""));
+        String fuelType = Objects.requireNonNull(sharedPreferences.getString("selectedCarFuel", ""));
+        String euroCategory = Objects.requireNonNull(sharedPreferences.getString("selectedCarEuro", ""));
 
         tvWelcomeName.setText(getString(R.string.welcome_user, userName));
         tvCarName.setText(getString(R.string.car_label, carBrand, carModel));
@@ -271,6 +274,7 @@ public class HomeFragment extends Fragment {
         ArrayList<PieEntry> entries = new ArrayList<>();
         List<Expense> thisMonthExpenses = Utilities.getThisMonthExpenses(expensesList);
         double spentRefuel = 0.0;
+        double spentCo2 = 0.0;
         double spentInsurance = 0.0;
         double spentTax = 0.0;
         double spentMaintenance = 0.0;
@@ -279,6 +283,9 @@ public class HomeFragment extends Fragment {
             switch (e.getType()) {
                 case "REFUEL":
                     spentRefuel += e.getSpent();
+                    break;
+                case "CO2":
+                    spentCo2 += e.getSpent();
                     break;
                 case "MAINTENANCE":
                     spentMaintenance += e.getSpent();
@@ -292,8 +299,9 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        double total = spentRefuel + spentMaintenance + spentInsurance + spentTax;
+        double total = spentRefuel + spentCo2 + spentMaintenance + spentInsurance + spentTax;
         if (spentRefuel > 0.0) entries.add(new PieEntry((float)((spentRefuel / total) * 100), getString(R.string.refuel_title)));
+        if (spentCo2 > 0.0) entries.add(new PieEntry((float)((spentCo2 / total) * 100), getString(R.string.co2_title)));
         if (spentMaintenance > 0.0) entries.add(new PieEntry((float)((spentMaintenance / total) * 100), getString(R.string.maintenance_title)));
         if (spentInsurance > 0.0) entries.add(new PieEntry((float)((spentInsurance / total) * 100), getString(R.string.insurance_title)));
         if (spentTax > 0.0) entries.add(new PieEntry((float)((spentTax / total) * 100), getString(R.string.tax_title)));

@@ -108,6 +108,9 @@ public class ExpenseListFragment extends Fragment {
                             case "REFUEL":
                                 iconId = R.drawable.ic_green_local_gas_station_for_list;
                                 break;
+                            case "CO2":
+                                iconId = R.drawable.ic_baseline_carbon;
+                                break;
                             case "MAINTENANCE":
                                 iconId = R.drawable.ic_tabler_engine;
                                 break;

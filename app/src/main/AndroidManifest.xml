@@ -51,6 +51,9 @@
         <activity
             android:name=".AddExpenseActivity"
             android:exported="false" />
+        <activity
+            android:name=".GetReadingsActivity"
+            android:exported="false" />
 
         <activity
             android:name=".MainActivity"
