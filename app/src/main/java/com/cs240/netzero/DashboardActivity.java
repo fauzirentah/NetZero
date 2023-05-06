@@ -89,7 +89,7 @@ public class DashboardActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //startActivity(new Intent(DashboardActivity.this, AddExpenseActivity.class).putExtra("expenseType", "CO2"));
-                startActivity(new Intent(DashboardActivity.this, GetReadingsActivity.class).putExtra("expenseType", "CO2"));
+                startActivity(new Intent(DashboardActivity.this, GetReadingsActivity.class).putExtra("expenseType", "DAILIES"));
             }
         });
 

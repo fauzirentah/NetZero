@@ -92,6 +92,7 @@
     <string name="insert_all_data_warning">Insert all data!</string>
     <string name="refuel_title">Refuel</string>
     <string name="co2_title" translatable="false">CO2</string>
+    <string name="dailies_title" translatable="false">Dailies</string>
     <string name="insurance_title">Insurance</string>
     <string name="db_error">DB ERROR: delete all data and re-register the car</string>
     <string name="no_expense_registered_warning">No expenses registered!</string>

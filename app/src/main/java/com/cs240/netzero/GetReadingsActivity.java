@@ -2,6 +2,9 @@ package com.cs240.netzero;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -10,14 +13,25 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.cs240.netzero.data.AppDatabase;
+import com.cs240.netzero.data.Expense;
+import com.cs240.netzero.data.ExpenseDao;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -30,6 +44,8 @@ public class GetReadingsActivity extends AppCompatActivity {
     private static final String TAG = "GetReadingsActivity";
     private static final String API_URL = "https://www.random.org/integers/?num=1&min=0&max=100&col=1&base=10&format=plain&rnd=new";
 
+    private String expenseType;
+    private long expenseId = 0L;
     private OkHttpClient okHttpClient;
     private Handler handler;
     private Handler mainHandler;
@@ -42,10 +58,16 @@ public class GetReadingsActivity extends AppCompatActivity {
     private int count;
     private Timer timer;
 
+    private AppDatabase db;
+    private ExpenseDao expenseDao;
+    private SharedPreferences sharedPreferences;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_get_readings);
+        expenseType = getIntent().getStringExtra("expenseType");
+        sharedPreferences = getSharedPreferences("com.cs240.netzero", Context.MODE_PRIVATE);
 
         mainHandler = new Handler(Looper.getMainLooper());
         okHttpClient = new OkHttpClient();
@@ -58,6 +80,10 @@ public class GetReadingsActivity extends AppCompatActivity {
         sum = 0;
         count = 0;
 
+        Button startButton = findViewById(R.id.start_button);
+        Button stopButton = findViewById(R.id.pause_button);
+        Button saveButton = findViewById(R.id.save_button);
+
         //Auto-start
 /*
         Timer timer = new Timer();
@@ -69,8 +95,6 @@ public class GetReadingsActivity extends AppCompatActivity {
         }, 0, 5000);
 */
         // Set up the start button
-        Button startButton = findViewById(R.id.start_button);
-        Button stopButton = findViewById(R.id.pause_button);
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -90,6 +114,13 @@ public class GetReadingsActivity extends AppCompatActivity {
             }
         });
 
+        saveButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) { registerExpense(); }
+        });
+
+        db = AppDatabase.getDatabase(getApplicationContext());
+        expenseDao = db.expenseDao();
     }
 
     private void startGettingData() {
@@ -198,4 +229,60 @@ public class GetReadingsActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void registerExpense() {
+
+        boolean errorFlag = false;
+        long selectedCarId = sharedPreferences.getLong("selectedCarId", -1L);
+
+        Calendar calendar = Calendar.getInstance();
+        Date date = calendar.getTime();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+        String dateString = dateFormat.format(date);
+
+        if (dateString.equals("")) {
+            dateString = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault()).format(new Date()).toString();
+        }
+
+        double totalSpent;
+        try {
+            totalSpent = Double.parseDouble(averageTextView.getText().toString());
+        } catch (NumberFormatException e) {
+            totalSpent = -1.0;
+        }
+
+        // String description = etDescription.getText().toString();
+
+        Expense newExpense = new Expense(
+                expenseId,
+                "Dailies",
+                expenseType,
+                dateString,
+                totalSpent,
+                null,
+                Double.parseDouble(countTextView.getText().toString()),
+                Integer.parseInt(sumTextView.getText().toString()),
+                selectedCarId
+        );
+
+        if (!errorFlag) {
+            ExecutorService service = Executors.newSingleThreadExecutor();
+            Handler handler = new Handler(Looper.getMainLooper());
+            Expense finalNewExpense = newExpense;
+            service.execute(new Runnable() {
+                @Override
+                public void run() {
+                    expenseDao.insertExpense(finalNewExpense);
+                    handler.post(new Runnable() {
+                        @Override
+                        public void run() {
+                            startActivity(new Intent(GetReadingsActivity.this, DashboardActivity.class));
+                            finish();
+                        }
+                    });
+                }
+            });
+        }
+    }
+
 }

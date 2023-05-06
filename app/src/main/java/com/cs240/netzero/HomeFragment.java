@@ -274,7 +274,7 @@ public class HomeFragment extends Fragment {
         ArrayList<PieEntry> entries = new ArrayList<>();
         List<Expense> thisMonthExpenses = Utilities.getThisMonthExpenses(expensesList);
         double spentRefuel = 0.0;
-        double spentCo2 = 0.0;
+        double spentDailies = 0.0;
         double spentInsurance = 0.0;
         double spentTax = 0.0;
         double spentMaintenance = 0.0;
@@ -284,8 +284,8 @@ public class HomeFragment extends Fragment {
                 case "REFUEL":
                     spentRefuel += e.getSpent();
                     break;
-                case "CO2":
-                    spentCo2 += e.getSpent();
+                case "DAILIES":
+                    spentDailies += e.getSpent();
                     break;
                 case "MAINTENANCE":
                     spentMaintenance += e.getSpent();
@@ -299,9 +299,9 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        double total = spentRefuel + spentCo2 + spentMaintenance + spentInsurance + spentTax;
+        double total = spentRefuel + spentDailies + spentMaintenance + spentInsurance + spentTax;
         if (spentRefuel > 0.0) entries.add(new PieEntry((float)((spentRefuel / total) * 100), getString(R.string.refuel_title)));
-        if (spentCo2 > 0.0) entries.add(new PieEntry((float)((spentCo2 / total) * 100), getString(R.string.co2_title)));
+        if (spentDailies > 0.0) entries.add(new PieEntry((float)((spentDailies / total) * 100), getString(R.string.dailies_title)));
         if (spentMaintenance > 0.0) entries.add(new PieEntry((float)((spentMaintenance / total) * 100), getString(R.string.maintenance_title)));
         if (spentInsurance > 0.0) entries.add(new PieEntry((float)((spentInsurance / total) * 100), getString(R.string.insurance_title)));
         if (spentTax > 0.0) entries.add(new PieEntry((float)((spentTax / total) * 100), getString(R.string.tax_title)));
