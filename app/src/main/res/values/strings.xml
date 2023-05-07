@@ -41,21 +41,24 @@
     <string name="hint_co2_title" translatable="false">Ex: Car CO2 emission</string>
     <string name="label_add_co2" translatable="false">Add CO2 emission</string>
     <string name="label_co2_title" translatable="false">Live CO2 data</string>
+    <string name="label_dailies_title" translatable="false">Where To ?</string>
     <string name="label_sum_co2_title" translatable="false">Sum</string>
     <string name="label_count_co2_title" translatable="false">Travel Duration (mins)</string>
     <string name="label_avg_co2_title" translatable="false">CO2 Average</string>
     <string name="label_welcome_home">Hello, Fauzi!</string>
     <string name="label_car_name">Mini Cooper S</string>
     <string name="label_total_spent_home">This month you spent</string>
-    <string name="euro">MYR</string>
+    <string name="euro"></string>
     <string name="sample_spent">00,00</string>
     <string name="sample_percent">+00,0%</string>
     <string name="label_emitted_home">You emitted</string>
     <string name="sample_emitted">0</string>
     <string name="g">g of CO</string>
     <string name="label_avg_consumption">Consumption</string>
+    <string name="label_total_time" translatable="false">Total Time</string>
     <string name="sample_consumption_home">0,0</string>
     <string name="l_100km">l/100km</string>
+    <string name="minutes" translatable="false">Mins</string>
     <string name="distribution">Distribution</string>
     <string name="trend">Trend</string>
     <string name="refuel">Refuel</string>
@@ -98,6 +101,7 @@
     <string name="no_expense_registered_warning">No expenses registered!</string>
     <string name="maintenance_title">Maintenance</string>
     <string name="tax_title">Taxes</string>
+    <string name="travel_title" translatable="false">Travels</string>
     <string name="expenses_trend">"Expenses trend "</string>
     <string name="consumptions_update">"Consumptions update "</string>
     <string name="spent_this_month">"This month you spent "</string>

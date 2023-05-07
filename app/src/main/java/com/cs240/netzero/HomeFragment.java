@@ -165,14 +165,14 @@ public class HomeFragment extends Fragment {
                         case "REFUEL":
                             iconId = R.drawable.ic_green_local_gas_station_for_list;
                             break;
-                        case "CO2":
-                            iconId = R.drawable.ic_baseline_carbon;
+                        case "DAILIES":
+                            iconId = R.drawable.ic_baseline_alarm_dailies_for_list;
                             break;
                         case "MAINTENANCE":
                             iconId = R.drawable.ic_tabler_engine;
                             break;
-                        case "TAX":
-                            iconId = R.drawable.ic_baseline_article_24;
+                        case "TRAVELS":
+                            iconId = R.drawable.ic_baseline_travel_luggage_for_list;
                             break;
                         default:
                             iconId = R.drawable.ic_bi_shield_check;
@@ -276,7 +276,7 @@ public class HomeFragment extends Fragment {
         double spentRefuel = 0.0;
         double spentDailies = 0.0;
         double spentInsurance = 0.0;
-        double spentTax = 0.0;
+        double spentTravels = 0.0;
         double spentMaintenance = 0.0;
 
         for (Expense e : thisMonthExpenses) {
@@ -290,8 +290,8 @@ public class HomeFragment extends Fragment {
                 case "MAINTENANCE":
                     spentMaintenance += e.getSpent();
                     break;
-                case "TAX":
-                    spentTax += e.getSpent();
+                case "TRAVELS":
+                    spentTravels += e.getSpent();
                     break;
                 default:
                     spentInsurance += e.getSpent();
@@ -299,12 +299,12 @@ public class HomeFragment extends Fragment {
             }
         }
 
-        double total = spentRefuel + spentDailies + spentMaintenance + spentInsurance + spentTax;
+        double total = spentRefuel + spentDailies + spentMaintenance + spentInsurance + spentTravels;
         if (spentRefuel > 0.0) entries.add(new PieEntry((float)((spentRefuel / total) * 100), getString(R.string.refuel_title)));
         if (spentDailies > 0.0) entries.add(new PieEntry((float)((spentDailies / total) * 100), getString(R.string.dailies_title)));
         if (spentMaintenance > 0.0) entries.add(new PieEntry((float)((spentMaintenance / total) * 100), getString(R.string.maintenance_title)));
         if (spentInsurance > 0.0) entries.add(new PieEntry((float)((spentInsurance / total) * 100), getString(R.string.insurance_title)));
-        if (spentTax > 0.0) entries.add(new PieEntry((float)((spentTax / total) * 100), getString(R.string.tax_title)));
+        if (spentTravels > 0.0) entries.add(new PieEntry((float)((spentTravels / total) * 100), getString(R.string.travel_title)));
 
         return entries;
     }

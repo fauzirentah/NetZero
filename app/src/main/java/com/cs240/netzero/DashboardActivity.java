@@ -88,7 +88,6 @@ public class DashboardActivity extends AppCompatActivity {
         fabAddCo2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //startActivity(new Intent(DashboardActivity.this, AddExpenseActivity.class).putExtra("expenseType", "CO2"));
                 startActivity(new Intent(DashboardActivity.this, GetReadingsActivity.class).putExtra("expenseType", "DAILIES"));
             }
         });
@@ -96,7 +95,7 @@ public class DashboardActivity extends AppCompatActivity {
         fabAddTax.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(DashboardActivity.this, AddExpenseActivity.class).putExtra("expenseType", "TAX"));
+                startActivity(new Intent(DashboardActivity.this, GetReadingsActivity.class).putExtra("expenseType", "TRAVELS"));
             }
         });
 
@@ -119,6 +118,7 @@ public class DashboardActivity extends AppCompatActivity {
         if (!clicked) {
             fabAddRefuel.setVisibility(View.VISIBLE);
             fabAddCo2.setVisibility(View.VISIBLE);
+            fabAddTax.setVisibility((View.VISIBLE));
 
         } else {
             fabAddMaintenance.setVisibility(View.GONE);

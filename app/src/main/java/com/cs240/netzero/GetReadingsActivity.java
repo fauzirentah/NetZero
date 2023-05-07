@@ -10,8 +10,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -25,8 +29,10 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -53,7 +59,11 @@ public class GetReadingsActivity extends AppCompatActivity {
     private TextView sumTextView;
     private TextView countTextView;
     private TextView averageTextView;
+    private String title;
     private ArrayList<Double> numbersList;
+    private List<String> items = Arrays.asList();
+    private ArrayAdapter<String> adapter;
+    private Spinner mySpinner;
     private int sum;
     private int count;
     private Timer timer;
@@ -79,6 +89,8 @@ public class GetReadingsActivity extends AppCompatActivity {
         numbersList = new ArrayList<>();
         sum = 0;
         count = 0;
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        mySpinner = findViewById(R.id.dailies_type_text);
 
         Button startButton = findViewById(R.id.start_button);
         Button stopButton = findViewById(R.id.pause_button);
@@ -121,7 +133,22 @@ public class GetReadingsActivity extends AppCompatActivity {
 
         db = AppDatabase.getDatabase(getApplicationContext());
         expenseDao = db.expenseDao();
+
+        setupViews();
+
     }
+
+    private void setupViews() {
+        if (expenseType.equals("DAILIES")) {
+            items = Arrays.asList("Home", "Work", "School", "Train/ Bus Station", "Malls");
+        } else if (expenseType.equals("TRAVELS")) {
+            items = Arrays.asList("Hometown", "Business Travel", "Holidays", "Site Visit");
+        }
+
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        mySpinner.setAdapter(adapter);
+    }
+
 
     private void startGettingData() {
         timer = new Timer();
@@ -235,6 +262,18 @@ public class GetReadingsActivity extends AppCompatActivity {
         boolean errorFlag = false;
         long selectedCarId = sharedPreferences.getLong("selectedCarId", -1L);
 
+        title = mySpinner.getSelectedItem().toString();
+        mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                title = parent.getItemAtPosition(position).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+            }
+        });
+
         Calendar calendar = Calendar.getInstance();
         Date date = calendar.getTime();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
@@ -255,7 +294,7 @@ public class GetReadingsActivity extends AppCompatActivity {
 
         Expense newExpense = new Expense(
                 expenseId,
-                "Dailies",
+                title,
                 expenseType,
                 dateString,
                 totalSpent,
