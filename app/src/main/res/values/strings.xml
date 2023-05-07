@@ -2,7 +2,7 @@
     <string name="app_name">KarboTrek</string>
     <string name="app_logo_description">KarboTrek Logo</string>
     <string name="welcome_title">Welcome!</string>
-    <string name="welcome_body">KarboTrek is an app that aims to keep track of the carbon emission expenses related to your car, showing graphs and information about the amount of CO emitted.\n\nAfter registering your car, you can start recording your carbon expenses. NetZero will also send you periodic notifications to inform you of your performance compared to the previous month.</string>
+    <string name="welcome_body">KarboTrek is an app that aims to keep track of the carbon emission expenses related to your car, showing graphs and information about the amount of CO emitted.\n\nAfter registering your car, you can start recording your carbon expenses. KarboTrek will also send you periodic notifications to inform you of your performance compared to the previous month.</string>
     <string name="btn_continue">Continue</string>
     <string name="select_brand_title">Select your car\'s manufacturer</string>
     <string name="select_model_title">Select your car\'s model</string>
