@@ -218,8 +218,8 @@ public class HomeFragment extends Fragment {
         double consumption = Utilities.getAvgConsumption(thisMonthExpenses);
 
         tvSpentThisMonth.setText(String.valueOf(spent));
-        tvEmittedThisMonth.setText(String.valueOf(emitted));
-        tvAvgConsumptionThisMonth.setText(String.valueOf(consumption));
+        tvEmittedThisMonth.setText(String.valueOf(String.format("%.2f", emitted)));
+        tvAvgConsumptionThisMonth.setText(String.valueOf(String.format("%.2f", consumption)));
 
         sharedPreferences.edit()
                 .putFloat("spentThisMonth", (float) spent)

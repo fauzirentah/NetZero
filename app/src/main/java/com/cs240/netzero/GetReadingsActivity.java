@@ -48,7 +48,8 @@ import okhttp3.Response;
 public class GetReadingsActivity extends AppCompatActivity {
 
     private static final String TAG = "GetReadingsActivity";
-    private static final String API_URL = "https://www.random.org/integers/?num=1&min=0&max=100&col=1&base=10&format=plain&rnd=new";
+    private static final String API_URL = "https://www.random.org/integers/?num=1&min=700&max=1000&col=1&base=10&format=plain&rnd=new";
+    // private static final String API_URL = "http://192.168.0.104/";
 
     private String expenseType;
     private long expenseId = 0L;
@@ -262,6 +263,15 @@ public class GetReadingsActivity extends AppCompatActivity {
         boolean errorFlag = false;
         long selectedCarId = sharedPreferences.getLong("selectedCarId", -1L);
 
+        double avgTravelTimePerKm = 0; // Average travel time in city drive or expressway
+        double fuelConsumption = 0; // Fuel consumption in city drive or expressway
+        double co2ePerLitre = 2.31; // Co2e per litre of petrol burned
+        double treeCapacity = 21.8; // Carbon sequestration capacity of one tree (kg)
+        double distanceEst;
+        double litresBurnedEst;
+        double co2eEst;
+        double numberOfTrees;
+
         title = mySpinner.getSelectedItem().toString();
         mySpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -291,6 +301,19 @@ public class GetReadingsActivity extends AppCompatActivity {
         }
 
         // String description = etDescription.getText().toString();
+        if (expenseType.equals("DAILIES")) {
+            avgTravelTimePerKm = 97;
+            fuelConsumption =  12.3;
+
+        } else if (expenseType.equals("TRAVELS")) {
+            avgTravelTimePerKm = 45;
+            fuelConsumption = 7;
+        }
+
+        distanceEst = Double.parseDouble(countTextView.getText().toString()) * 60 / avgTravelTimePerKm;
+        litresBurnedEst = distanceEst / fuelConsumption;
+        co2eEst = litresBurnedEst * co2ePerLitre;
+        numberOfTrees = co2eEst / treeCapacity;
 
         Expense newExpense = new Expense(
                 expenseId,
@@ -298,11 +321,13 @@ public class GetReadingsActivity extends AppCompatActivity {
                 expenseType,
                 dateString,
                 totalSpent,
-                null,
+                String.valueOf(co2eEst),
                 Double.parseDouble(countTextView.getText().toString()),
-                Integer.parseInt(sumTextView.getText().toString()),
+                Double.parseDouble(String.valueOf(numberOfTrees)),
                 selectedCarId
         );
+
+        // Expense newExpense = new Expense(expenseId,title,expenseType,dateString,totalSpent,null,Double.parseDouble(countTextView.getText().toString()),Integer.parseInt(sumTextView.getText().toString()),selectedCarId);
 
         if (!errorFlag) {
             ExecutorService service = Executors.newSingleThreadExecutor();

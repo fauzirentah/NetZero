@@ -207,7 +207,7 @@ public class AddExpenseActivity extends AppCompatActivity {
                     pricePerLiter = -1.0;
                 }
 
-                int totalKm;
+                double totalKm;
                 try {
                     totalKm = Integer.parseInt(etTotalKm.getText().toString());
                 } catch (NumberFormatException e) {

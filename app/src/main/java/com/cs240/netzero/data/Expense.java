@@ -28,13 +28,13 @@ public class Expense {
     public final Double pricePerLiter;
 
     @ColumnInfo(name = "total_km")
-    public final Integer totalKm;
+    public final Double totalKm;
 
     @ColumnInfo(name = "carId")
     public final long carId;
 
     public Expense(long expenseId, String title, String type, String date, double spent, String description,
-                   Double pricePerLiter, Integer totalKm, long carId) {
+                   Double pricePerLiter, Double totalKm, long carId) {
         this.expenseId = expenseId;
         this.title = title;
         this.type = type;
@@ -64,7 +64,7 @@ public class Expense {
         return this.spent;
     }
 
-    public int getTotalKm() {
+    public double getTotalKm() {
         return this.totalKm;
     }
 

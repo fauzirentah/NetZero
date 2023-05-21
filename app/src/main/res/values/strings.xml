@@ -53,12 +53,12 @@
     <string name="sample_percent">+00,0%</string>
     <string name="label_emitted_home">You emitted</string>
     <string name="sample_emitted">0</string>
-    <string name="g">g of CO</string>
+    <string name="g">kg of CO2e</string>
     <string name="label_avg_consumption">Consumption</string>
-    <string name="label_total_time" translatable="false">Total Time</string>
+    <string name="label_total_time" translatable="false">Equivalent</string>
     <string name="sample_consumption_home">0,0</string>
     <string name="l_100km">l/100km</string>
-    <string name="minutes" translatable="false">Mins</string>
+    <string name="minutes" translatable="false">trees</string>
     <string name="distribution">Distribution</string>
     <string name="trend">Trend</string>
     <string name="refuel">Refuel</string>
