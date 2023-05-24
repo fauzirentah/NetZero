@@ -105,6 +105,7 @@
     <string name="expenses_trend">"Expenses trend "</string>
     <string name="consumptions_update">"Consumptions update "</string>
     <string name="spent_this_month">"This month you spent "</string>
+    <string name="ppm" translatable="false">ppm</string>
     <string name="emitting">" MYR, emitting "</string>
     <string name="with_medium_consumption">" g of CO, with an average consumption of "</string>
     <string name="doing_great">% compared with the previous month, you\'re doing great!</string>

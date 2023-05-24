@@ -90,6 +90,13 @@
             android:fontFamily="@font/montserrat_semibold"
             android:textSize="16sp"
             android:layout_marginStart="12dp"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ppm"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:fontFamily="@font/montserrat_semibold"/>
     </LinearLayout>
 
     <LinearLayout

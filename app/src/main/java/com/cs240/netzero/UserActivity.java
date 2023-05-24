@@ -74,18 +74,18 @@ public class UserActivity extends AppCompatActivity {
         String previousYear = new SimpleDateFormat("yyyy", Locale.getDefault()).format(calendar.getTime());
 
         List<Expense> expenses = Arrays.asList(
-                new Expense(0, getString(R.string.air_filter), "MAINTENANCE", "03/" + previousMonth + "/" + previousYear, 60.0, null, null, null, selectedCarId),
-                new Expense(0, getString(R.string.refuel_title), "REFUEL", "05/" + previousMonth + "/" + previousYear, 20.0, null, 2.0, 1000.0, selectedCarId),
-                new Expense(0, getString(R.string.refuel_title), "REFUEL", "13/" + previousMonth + "/" + previousYear, 20.0, null, 2.0, 1150.0, selectedCarId),
-                new Expense(0, getString(R.string.tax_title) + " " + previousYear, "TAX", "20/" + previousMonth + "/" + previousYear, 50.0, getString(R.string.example_tax_description1), null, null, selectedCarId),
-                new Expense(0, getString(R.string.brake_pads), "MAINTENANCE", "25/" + previousMonth + "/" + previousYear, 73.0, getString(R.string.example_maint_description1), null, null, selectedCarId),
-                new Expense(0, getString(R.string.refuel_title), "REFUEL", "29/" + previousMonth + "/" + previousYear, 50.0, null, 2.0, 1290.0, selectedCarId),
-                new Expense(0, getString(R.string.oil_change), "MAINTENANCE", "02/" + currentMonth + "/" + currentYear, 25.0, getString(R.string.example_maint_description2), null, null, selectedCarId),
-                new Expense(0, getString(R.string.refuel_title), "REFUEL", "05/" + currentMonth + "/" + currentYear, 30.0, null, 2.0, 1640.0, selectedCarId),
-                new Expense(0, getString(R.string.refuel_title), "REFUEL", "14/" + currentMonth + "/" + currentYear, 20.0, null, 2.0, 1820.0, selectedCarId),
-                new Expense(0, getString(R.string.insurance_title) + " " + currentYear, "INSURANCE", "18/" + currentMonth + "/" + currentYear, 130.0, getString(R.string.example_ins_description1), null, null, selectedCarId),
-                new Expense(0, getString(R.string.tax_title) + " " + currentYear, "TAX", "20/" + currentMonth + "/" + currentYear, 50.0, getString(R.string.example_tax_description1), null, null, selectedCarId),
-                new Expense(0, getString(R.string.refuel_title), "REFUEL", "21/" + currentMonth + "/" + currentYear, 20.0, null, 2.0, 2050.0, selectedCarId)
+                new Expense(0, "Business Travel", "TRAVELS", "03/" + previousMonth + "/" + previousYear, 783.5, "0.713", null, 0.1025, selectedCarId),
+                new Expense(0, "Work", "DAILIES", "05/" + previousMonth + "/" + previousYear, 820.3, "0.643", 2.0, 0.10, selectedCarId),
+                new Expense(0, "Home", "DAILIES", "13/" + previousMonth + "/" + previousYear, 927.7, "0.541", 2.0, 0.10, selectedCarId),
+                new Expense(0, "Site Visit", "TRAVELS", "20/" + previousMonth + "/" + previousYear, 858.2, "0.815", null, 0.12035, selectedCarId),
+                new Expense(0, "Holidays", "TRAVELS", "25/" + previousMonth + "/" + previousYear, 737.9, "0.616", null, 0.07125, selectedCarId),
+                new Expense(0, "School", "DAILIES", "29/" + previousMonth + "/" + previousYear, 919.5, "0.875", 2.0, 0.0129, selectedCarId),
+                new Expense(0, "Hometown", "TRAVELS", "02/" + currentMonth + "/" + currentYear, 825.4, "0.782", null, 0.1525, selectedCarId),
+                new Expense(0, "Malls", "DAILIES", "05/" + currentMonth + "/" + currentYear, 730.9, "0.715", 2.0, 0.04, selectedCarId),
+                new Expense(0, "Work", "DAILIES", "14/" + currentMonth + "/" + currentYear, 826.2, "0.743", 2.0, 0.182, selectedCarId),
+                new Expense(0, "Business Travel", "TRAVELS", "18/" + currentMonth + "/" + currentYear, 1130.8, "1.548", null, 0.4525, selectedCarId),
+                new Expense(0, "Train/ Bus Station", "DAILIES", "20/" + currentMonth + "/" + currentYear, 1050.7, "5.216", null, 0.212, selectedCarId),
+                new Expense(0, "Home", "DAILIES", "21/" + currentMonth + "/" + currentYear, 627.8, "5.816", 2.0, 2.05, selectedCarId)
         );
 
         ExecutorService service = Executors.newSingleThreadExecutor();
