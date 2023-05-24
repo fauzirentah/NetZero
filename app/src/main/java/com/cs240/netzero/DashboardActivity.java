@@ -116,14 +116,13 @@ public class DashboardActivity extends AppCompatActivity {
 
     private void setVisibility() {
         if (!clicked) {
-            fabAddRefuel.setVisibility(View.VISIBLE);
             fabAddCo2.setVisibility(View.VISIBLE);
             fabAddTax.setVisibility((View.VISIBLE));
 
         } else {
             fabAddMaintenance.setVisibility(View.GONE);
             fabAddCo2.setVisibility(View.INVISIBLE);
-            fabAddRefuel.setVisibility(View.INVISIBLE);
+            fabAddRefuel.setVisibility(View.GONE);
             fabAddInsurance.setVisibility(View.GONE);
             fabAddTax.setVisibility((View.GONE));
 
