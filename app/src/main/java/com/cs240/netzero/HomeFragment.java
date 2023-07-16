@@ -217,7 +217,7 @@ public class HomeFragment extends Fragment {
         double emitted = Utilities.getEmitted(thisMonthExpenses, fuelType, euroCategory);
         double consumption = Utilities.getAvgConsumption(thisMonthExpenses);
 
-        tvSpentThisMonth.setText(String.valueOf(spent));
+        tvSpentThisMonth.setText(String.valueOf(String.format("%.1f", spent)));
         tvEmittedThisMonth.setText(String.valueOf(String.format("%.1f", emitted)));
         tvAvgConsumptionThisMonth.setText(String.valueOf(String.format("%.1f", consumption)));
 

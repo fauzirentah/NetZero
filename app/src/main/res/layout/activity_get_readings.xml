@@ -57,6 +57,28 @@
             android:completionThreshold="1" />
     </LinearLayout>
 
+    <Button
+        android:id="@+id/start_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/start_button"
+        app:cornerRadius="100dp"
+        android:layout_marginBottom="42dp"/>
+
+    <Button
+        android:id="@+id/pause_button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:text="@string/pause_button"
+        app:cornerRadius="100dp"
+        android:layout_marginBottom="42dp"
+        android:backgroundTint="@color/gray"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -198,28 +220,6 @@
             android:gravity="center_vertical"
             />
     </LinearLayout>
-
-    <Button
-        android:id="@+id/start_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/start_button"
-        app:cornerRadius="100dp"
-        android:layout_marginTop="42dp"/>
-
-    <Button
-        android:id="@+id/pause_button"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="16dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:text="@string/pause_button"
-        app:cornerRadius="100dp"
-        android:layout_marginTop="42dp"
-        android:backgroundTint="@color/gray"
-        android:visibility="gone"/>
 
     <Button
         android:id="@+id/save_button"

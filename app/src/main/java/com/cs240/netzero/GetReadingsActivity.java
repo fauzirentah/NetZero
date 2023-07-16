@@ -1,10 +1,20 @@
 package com.cs240.netzero;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.NotificationCompat;
+import androidx.core.app.NotificationManagerCompat;
+import androidx.core.app.TaskStackBuilder;
 
+import android.app.ActivityManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -67,6 +77,8 @@ public class GetReadingsActivity extends AppCompatActivity {
     private Spinner mySpinner;
     private int sum;
     private int count;
+    private int sumNotificationId = -1;
+    private static final String CHANNEL_ID = "KarboTrek_CO2";
     private Timer timer;
 
     private AppDatabase db;
@@ -97,16 +109,6 @@ public class GetReadingsActivity extends AppCompatActivity {
         Button stopButton = findViewById(R.id.pause_button);
         Button saveButton = findViewById(R.id.save_button);
 
-        //Auto-start
-/*
-        Timer timer = new Timer();
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                getNumberFromAPI();
-            }
-        }, 0, 5000);
-*/
         // Set up the start button
         startButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -140,9 +142,9 @@ public class GetReadingsActivity extends AppCompatActivity {
     }
 
     private void setupViews() {
-        if (expenseType.equals("DAILIES")) {
+        if (expenseType != null && expenseType.equals("DAILIES")) {
             items = Arrays.asList("Home", "Work", "School", "Train/ Bus Station", "Malls");
-        } else if (expenseType.equals("TRAVELS")) {
+        } else if (expenseType != null && expenseType.equals("TRAVELS")) {
             items = Arrays.asList("Hometown", "Business Travel", "Holidays", "Site Visit");
         }
 
@@ -191,6 +193,49 @@ public class GetReadingsActivity extends AppCompatActivity {
                         public void run() {
                             singleNumberTextView.setText(String.valueOf(number.intValue()));
                             addNumberToList(number.intValue());
+
+                            if (number > 850) {
+                                singleNumberTextView.setTextColor(Color.RED);
+
+                                // Send notification
+                                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                    createNotificationChannel();
+                                }
+
+                                if (sumNotificationId == -1) {
+                                    sumNotificationId = 1;
+                                } else {
+                                    sumNotificationId++;
+                                }
+
+                                if (!isGetReadingsActivityActive()) {
+
+                                // Create an explicit intent to open the GetReadingsActivity
+                                Intent intent = new Intent(getApplicationContext(), GetReadingsActivity.class);
+                                intent.setAction(Intent.ACTION_MAIN);
+                                intent.addCategory(Intent.CATEGORY_LAUNCHER);
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+
+                                // Get the PendingIntent from the TaskStackBuilder
+                                PendingIntent pendingIntent = PendingIntent.getActivity(GetReadingsActivity.this, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+                                // Create the notification
+                                NotificationCompat.Builder builder = new NotificationCompat.Builder(GetReadingsActivity.this, CHANNEL_ID)
+                                        .setSmallIcon(R.drawable.ic_co2_logo)
+                                        .setContentTitle("CO2 alert")
+                                        .setContentText("CO2 emission exceeds recommended value: " + number)
+                                        .setPriority(NotificationCompat.PRIORITY_HIGH)
+                                        .setContentIntent(pendingIntent) // Set the pending intent
+                                        .setAutoCancel(true);
+
+                                NotificationManagerCompat notificationManager = NotificationManagerCompat.from(GetReadingsActivity.this);
+                                notificationManager.notify(sumNotificationId, builder.build());
+                                }
+
+                            } else {
+                                singleNumberTextView.setTextColor(Color.GRAY); // Set the default color here
+                            }
+
                         }
                     };
 
@@ -227,6 +272,7 @@ public class GetReadingsActivity extends AppCompatActivity {
                 }
                 int sumInt = (int) sum.doubleValue();
                 sumTextView.setText(String.valueOf(sumInt));
+
             }
         });
     }
@@ -256,6 +302,33 @@ public class GetReadingsActivity extends AppCompatActivity {
                 averageTextView.setText(df.format(average));
             }
         });
+    }
+
+    private void createNotificationChannel() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            CharSequence name = "Sum Notification Channel";
+            String description = "Channel for displaying sum notification";
+            int importance = NotificationManager.IMPORTANCE_HIGH;
+            NotificationChannel channel = new NotificationChannel(CHANNEL_ID, name, importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
+        }
+    }
+
+    private boolean isGetReadingsActivityActive() {
+        ActivityManager activityManager = (ActivityManager) getSystemService(Context.ACTIVITY_SERVICE);
+        if (activityManager != null) {
+            List<ActivityManager.RunningTaskInfo> runningTasks = activityManager.getRunningTasks(1);
+            if (!runningTasks.isEmpty()) {
+                ComponentName topActivity = runningTasks.get(0).topActivity;
+                if (topActivity != null && topActivity.getClassName().equals(GetReadingsActivity.class.getName())) {
+                    return true; // GetReadingsActivity is active
+                }
+            }
+        }
+        return false; // GetReadingsActivity is not active
     }
 
     private void registerExpense() {
