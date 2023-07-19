@@ -58,8 +58,8 @@ import okhttp3.Response;
 public class GetReadingsActivity extends AppCompatActivity {
 
     private static final String TAG = "GetReadingsActivity";
-    private static final String API_URL = "https://www.random.org/integers/?num=1&min=700&max=1000&col=1&base=10&format=plain&rnd=new";
-    // private static final String API_URL = "http://192.168.0.104/";
+    // private static final String API_URL = "https://www.random.org/integers/?num=1&min=700&max=1000&col=1&base=10&format=plain&rnd=new";
+     private static final String API_URL = "http://172.20.10.2/";
 
     private String expenseType;
     private long expenseId = 0L;
@@ -77,6 +77,7 @@ public class GetReadingsActivity extends AppCompatActivity {
     private Spinner mySpinner;
     private int sum;
     private int count;
+    private int co2max = 1000;
     private int sumNotificationId = -1;
     private static final String CHANNEL_ID = "KarboTrek_CO2";
     private Timer timer;
@@ -191,10 +192,12 @@ public class GetReadingsActivity extends AppCompatActivity {
                     Runnable updateUIRunnable = new Runnable() {
                         @Override
                         public void run() {
-                            singleNumberTextView.setText(String.valueOf(number.intValue()));
+                            // singleNumberTextView.setText(String.valueOf(number.intValue()));
+                            singleNumberTextView.setText("Normal");
                             addNumberToList(number.intValue());
 
-                            if (number > 850) {
+                            if (number > co2max) {
+                                singleNumberTextView.setText("High");
                                 singleNumberTextView.setTextColor(Color.RED);
 
                                 // Send notification

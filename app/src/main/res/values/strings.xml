@@ -14,7 +14,7 @@
     <string name="petrol">Petrol</string>
     <string name="hybrid">Hybrid</string>
     <string name="fab_add_expense">Add expense</string>
-    <string name="Get_co2_readings" translatable="false">Get CO2 readings</string>
+    <string name="Get_co2_readings" translatable="false">CO2 Monitor</string>
     <string name="btn_register">Register</string>
     <string name="hint_km">Ex: 49556 km</string>
     <string name="label_total_km">Total car\'s km</string>
@@ -41,6 +41,7 @@
     <string name="hint_co2_title" translatable="false">Ex: Car CO2 emission</string>
     <string name="label_add_co2" translatable="false">Add CO2 emission</string>
     <string name="label_co2_title" translatable="false">Live CO2 data</string>
+    <string name="label_co2_title2" translatable="false">Your CO2 emission</string>
     <string name="label_dailies_title" translatable="false">Where To ?</string>
     <string name="label_sum_co2_title" translatable="false">Sum</string>
     <string name="label_count_co2_title" translatable="false">Travel Duration (mins)</string>
