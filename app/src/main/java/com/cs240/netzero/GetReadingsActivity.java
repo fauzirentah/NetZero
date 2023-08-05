@@ -58,8 +58,8 @@ import okhttp3.Response;
 public class GetReadingsActivity extends AppCompatActivity {
 
     private static final String TAG = "GetReadingsActivity";
-    // private static final String API_URL = "https://www.random.org/integers/?num=1&min=700&max=1000&col=1&base=10&format=plain&rnd=new";
-     private static final String API_URL = "http://172.20.10.2/";
+    //private static final String API_URL = "https://www.random.org/integers/?num=1&min=100&max=200&col=1&base=10&format=plain&rnd=new";
+    private static final String API_URL = "http://172.20.10.2/";
 
     private String expenseType;
     private long expenseId = 0L;
@@ -70,6 +70,7 @@ public class GetReadingsActivity extends AppCompatActivity {
     private TextView sumTextView;
     private TextView countTextView;
     private TextView averageTextView;
+    private TextView redAlertTextView;
     private String title;
     private ArrayList<Double> numbersList;
     private List<String> items = Arrays.asList();
@@ -77,7 +78,7 @@ public class GetReadingsActivity extends AppCompatActivity {
     private Spinner mySpinner;
     private int sum;
     private int count;
-    private int co2max = 1000;
+    private int co2max = 100;
     private int sumNotificationId = -1;
     private static final String CHANNEL_ID = "KarboTrek_CO2";
     private Timer timer;
@@ -100,6 +101,7 @@ public class GetReadingsActivity extends AppCompatActivity {
         sumTextView = findViewById(R.id.sum_text_view);
         countTextView = findViewById(R.id.count_text_view);
         averageTextView = findViewById(R.id.average_text_view);
+        redAlertTextView = findViewById(R.id.red_alert);
         numbersList = new ArrayList<>();
         sum = 0;
         count = 0;
@@ -195,10 +197,12 @@ public class GetReadingsActivity extends AppCompatActivity {
                             // singleNumberTextView.setText(String.valueOf(number.intValue()));
                             singleNumberTextView.setText("Normal");
                             addNumberToList(number.intValue());
+                            redAlertTextView.setVisibility(View.INVISIBLE);
 
                             if (number > co2max) {
                                 singleNumberTextView.setText("High");
                                 singleNumberTextView.setTextColor(Color.RED);
+                                redAlertTextView.setVisibility(View.VISIBLE);
 
                                 // Send notification
                                 if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {

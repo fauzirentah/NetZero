@@ -28,6 +28,7 @@ public class SelectCarFuelTypeActivity extends AppCompatActivity {
             TextView tvSelectFuelType = findViewById(R.id.textViewSelectFuelType);
             tvSelectFuelType.setText(tvSelectFuelType.getText().toString().replace("auto", selectedBrand + " " + selectedModel));
         }
+        selectedFuel.set("petrol");
 
         toggleGroup.addOnButtonCheckedListener((group, checkedId, isChecked) -> {
             if (isChecked) {

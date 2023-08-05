@@ -37,15 +37,13 @@ public class SelectCarPetrolCategoryActivity extends AppCompatActivity {
 
         selectedBrand = getIntent().getStringExtra("selectedBrand");
         selectedModel = getIntent().getStringExtra("selectedModel");
-        selectedFuel = getIntent().getStringExtra("selectedFuel");
+        // selectedFuel = getIntent().getStringExtra("selectedFuel");
+        selectedFuel = "Petrol";
         selectedEuro = "";
 
         String[] euroCategory = new String[]{
-                "RON92",
                 "RON95",
-                "RON97",
-                "RON98",
-                "RON100"
+                "RON97"
         };
 
         if(selectedModel != null && !selectedModel.isEmpty() && selectedFuel != null && !selectedFuel.isEmpty()){

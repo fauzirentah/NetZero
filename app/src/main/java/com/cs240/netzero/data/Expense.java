@@ -21,28 +21,28 @@ public class Expense {
     @ColumnInfo(name = "spent")
     public final double spent;
 
-    @ColumnInfo(name = "description")
-    public final String description;
+    @ColumnInfo(name = "co2e")
+    public final String co2e;
 
-    @ColumnInfo(name = "price_per_liter")
-    public final Double pricePerLiter;
+    @ColumnInfo(name = "duration")
+    public final Double duration;
 
-    @ColumnInfo(name = "total_km")
-    public final Double totalKm;
+    @ColumnInfo(name = "total_tree")
+    public final Double totalTree;
 
     @ColumnInfo(name = "carId")
     public final long carId;
 
-    public Expense(long expenseId, String title, String type, String date, double spent, String description,
-                   Double pricePerLiter, Double totalKm, long carId) {
+    public Expense(long expenseId, String title, String type, String date, double spent, String co2e,
+                   Double duration, Double totalTree, long carId) {
         this.expenseId = expenseId;
         this.title = title;
         this.type = type;
         this.date = date;
         this.spent = spent;
-        this.description = description;
-        this.pricePerLiter = pricePerLiter;
-        this.totalKm = totalKm;
+        this.co2e = co2e;
+        this.duration = duration;
+        this.totalTree = totalTree;
         this.carId = carId;
     }
 
@@ -54,7 +54,7 @@ public class Expense {
         return this.title;
     }
 
-    public String getDescription() { return this.description; }
+    public String getDescription() { return this.co2e; }
 
     public String getType() {
         return this.type;
@@ -65,7 +65,7 @@ public class Expense {
     }
 
     public double getTotalKm() {
-        return this.totalKm;
+        return this.totalTree;
     }
 
     public String getDate() {
@@ -73,6 +73,6 @@ public class Expense {
     }
 
     public Double getPricePerLiter() {
-        return this.pricePerLiter;
+        return this.duration;
     }
 }

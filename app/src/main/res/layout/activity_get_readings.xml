@@ -119,43 +119,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:id="@+id/etCo2SumContainer"
-        android:layout_marginBottom="16dp">
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/label_sum_co2_title"
-        android:textAllCaps="true"
-        android:layout_marginBottom="8dp"
-        android:fontFamily="@font/montserrat_semibold"
-        android:textColor="@color/lightgray"
-        android:letterSpacing="0.16"
-        android:textSize="12sp"
-        android:visibility="gone"
-        />
-
-    <TextView
-        android:id="@+id/sum_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="48dp"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/rounded_edittext"
-        android:fontFamily="@font/montserrat_regular"
-        android:inputType="text"
-        android:paddingStart="24dp"
-        android:paddingEnd="4dp"
-        android:autofillHints=""
-        android:textSize="18dp"
-        android:gravity="center_vertical"
-        android:visibility="gone"
-        />
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
         android:id="@+id/etCo2CountContainer"
         android:layout_marginBottom="16dp">
         <TextView
@@ -191,6 +154,43 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:id="@+id/etCo2SumContainer"
+        android:layout_marginBottom="16dp">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/label_sum_co2_title"
+        android:textAllCaps="true"
+        android:layout_marginBottom="8dp"
+        android:fontFamily="@font/montserrat_semibold"
+        android:textColor="@color/lightgray"
+        android:letterSpacing="0.16"
+        android:textSize="12sp"
+        android:visibility="invisible"
+        />
+
+    <TextView
+        android:id="@+id/sum_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginEnd="12dp"
+        android:background="@drawable/rounded_edittext"
+        android:fontFamily="@font/montserrat_regular"
+        android:inputType="text"
+        android:paddingStart="24dp"
+        android:paddingEnd="4dp"
+        android:autofillHints=""
+        android:textSize="18dp"
+        android:gravity="center_vertical"
+        android:visibility="invisible"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
         android:id="@+id/etCo2AvgContainer"
         android:layout_marginBottom="16dp">
         <TextView
@@ -203,7 +203,7 @@
             android:textColor="@color/lightgray"
             android:letterSpacing="0.16"
             android:textSize="12sp"
-            android:visibility="gone"
+            android:visibility="invisible"
             />
 
         <TextView
@@ -222,6 +222,17 @@
             android:gravity="center_vertical"
             android:visibility="gone"
             />
+
+        <TextView
+            android:id="@+id/red_alert"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please drive less aggressively. If you are not, the car maybe is due for maintenance"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/red"
+            android:textSize="14sp"
+            android:gravity="center"
+            android:visibility="invisible" />
     </LinearLayout>
 
     <Button

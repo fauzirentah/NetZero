@@ -56,7 +56,7 @@ public class SelectCarModelActivity extends AppCompatActivity {
         Button btnNext = findViewById(R.id.btnModelNext);
         btnNext.setOnClickListener(view -> {
             if (selectedBrand != null && selectedBrand.length() > 0 && selectedModel != null && selectedModel.length() > 0) {
-                Intent intent = new Intent(this, SelectCarFuelTypeActivity.class);
+                Intent intent = new Intent(this, SelectCarPetrolCategoryActivity.class);
                 intent.putExtra("selectedBrand", selectedBrand);
                 intent.putExtra("selectedModel", selectedModel);
                 startActivity(intent);
